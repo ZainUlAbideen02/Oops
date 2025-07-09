@@ -12,6 +12,23 @@ class Node{
   }
 };
 
+//Adding Node at nth Position
+void nthPositionAdding(Node * head,int position,int value){
+
+  Node * temp;
+  temp = NULL;
+  
+  for(int i = 0 ; i <position-1;i++){
+    temp = head;
+    head = head->next;
+  }
+ 
+  Node * temp2 = new Node(value);
+  temp2->next = temp->next;
+  temp->next = temp2;
+
+}
+
 //Backward adding
 Node * BackwardLinkedlist(int array [],int size,int index){
   //Base Case
@@ -42,16 +59,32 @@ int main(){
   Node * head ;
   head = NULL;
 
-//For Backward
- // head = BackwardLinkedlist(array,4,0);
+//For Backward of array
+  head = BackwardLinkedlist(array,4,0);
    
-//For Forward
-  head = ForwardLinkedList(array,4,0,NULL);
-  
-//printing
-  while(head!=NULL){
-    cout<<head->data<<endl;
-    head = head->next;
+//For Forward of array
+ // head = ForwardLinkedList(array,4,0,NULL);
+
+//Making copy of head to use
+  Node * current = head;
+
+//printing before nth Position Adding
+cout<<"Printing after nth Position"<<endl;
+ while(current!=NULL){
+    cout<<current->data<<endl;
+    current = current->next;
   }
 
+//Adding Node at nth Position
+  nthPositionAdding(head,5,10);
+
+//printing after nth Position Adding
+  cout<<"Printing after nth Position"<<endl;
+
+//Again Reassigning the head pointer
+current = head;
+ while(current!=NULL){
+    cout<<current->data<<endl;
+    current = current->next;
+  }
 }
