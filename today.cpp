@@ -12,29 +12,28 @@ class Node{
   }
 };
 
-int main(){
+Node * BackwardLinkedlist(int array [],int size,int index){
+  //Base Case
+  if(index==size){
+    return NULL;
+  }
+  Node * temp = new Node (array[index]);
+  temp->next=BackwardLinkedlist(array,size,index+1);
+  return temp;
+}
 
-  int array [] = {2,3,4,5};
- Node * head;
- head = NULL;
+int main(){
+  int array [] = {2,4,6,8};
   
- Node * tail;
- tail = NULL;
-//Backward Adding
-  for(int i = 0;i<4;i++){
- if(head==NULL){
-  head = new Node(array[i]);
-  tail = head;
- }
-else{
-  Node * temp = new Node(array[i]);
-  tail->next=temp;
-  tail= temp;
-}
-}
-//To Print
-while(head){
-cout<<head->data<<endl;
-head= head->next;
-}
+  Node * head ;
+  head = NULL;
+
+  head = BackwardLinkedlist(array,4,0);
+ 
+  //printing
+  while(head!=NULL){
+    cout<<head->data<<endl;
+    head = head->next;
+  }
+
 }
