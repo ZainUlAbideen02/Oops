@@ -39,7 +39,19 @@ Node * deletingLastNode(Node * head){
   return head;
 }
 
+//Deleting the nth Node by pointers of LinkedList
+Node * DeletingnthNode(Node * head,int position){
+    Node * temp = head;
+    Node * prev = NULL;
 
+  for (int i = 0 ; i < position-1;i++){
+    prev = temp;
+    temp = temp->next;
+  }
+    prev->next = temp->next;
+    delete temp;
+    return head;
+}
 
 //Backward adding using Recursion [1,2,3,4,...]
 Node * BackwardLinkedlist(int array [],int size,int index){
@@ -63,16 +75,18 @@ int main(){
   head = BackwardLinkedlist(array,4,0);
    
   Node * temp = head;
-  //Printing Before the Last Node deletion
+
+  //Printing Before the nth Node deletion
   while(temp){
     cout<<temp->data<<endl;
     temp = temp->next;
   }
   cout<<endl;
-  //Calling the Function and Receiving back into same pointer
- head = deletingLastNode(head);
-  
-  //Printing After the Last Node deletion
+
+  //Deleting the nth Node , where as 2 can also be any other postion
+  head  = DeletingnthNode(head,2);
+
+  //Printing After the nth Node deletion
   temp = head ;
   while(temp){
     cout<<temp->data<<endl;
