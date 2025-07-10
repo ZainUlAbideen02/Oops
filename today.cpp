@@ -12,24 +12,18 @@ class Node{
   }
 };
 
-//Adding Node at nth Position
-void nthPositionAdding(Node * head,int position,int value){
 
-  Node * temp;
-  temp = NULL;
-  
-  for(int i = 0 ; i <position-1;i++){
-    temp = head;
+//Deleting the First Node by pointers of LinkedList
+Node * deleteFirstNode(Node * head){
+  if(head!=NULL){
+    Node * temp = head;
     head = head->next;
+    delete temp;
   }
- 
-  Node * temp2 = new Node(value);
-  temp2->next = temp->next;
-  temp->next = temp2;
-
+  return head;
 }
 
-//Backward adding
+//Backward adding using Recursion [1,2,3,4,...]
 Node * BackwardLinkedlist(int array [],int size,int index){
   //Base Case
   if(index==size){
@@ -40,19 +34,6 @@ Node * BackwardLinkedlist(int array [],int size,int index){
   return temp;
 }
 
-//Forward Adding
-
-Node * ForwardLinkedList(int array[],int size,int index,Node* prev){
-  //Base Case
-  if(size==index){
-    return prev;
-  }
-  Node * temp = new Node(array[index]);
-  temp->next=prev;
-  return ForwardLinkedList(array,size,index+1,temp);
-}
-
-
 int main(){
   int array [] = {2,4,6,8};
   
@@ -62,29 +43,21 @@ int main(){
 //For Backward of array
   head = BackwardLinkedlist(array,4,0);
    
-//For Forward of array
- // head = ForwardLinkedList(array,4,0,NULL);
-
-//Making copy of head to use
-  Node * current = head;
-
-//printing before nth Position Adding
-cout<<"Printing after nth Position"<<endl;
- while(current!=NULL){
-    cout<<current->data<<endl;
-    current = current->next;
+  Node * temp = head;
+  //Printing Before the First Node deletion
+  while(temp){
+    cout<<temp->data<<endl;
+    temp = temp->next;
+  }
+  cout<<endl;
+  //Calling the Function and Receiving back into same pointer
+  head = deleteFirstNode(head);
+  
+  //Printing After the First Node deletion
+  temp = head ;
+  while(temp){
+    cout<<temp->data<<endl;
+    temp = temp->next;
   }
 
-//Adding Node at nth Position
-  nthPositionAdding(head,5,10);
-
-//printing after nth Position Adding
-  cout<<"Printing after nth Position"<<endl;
-
-//Again Reassigning the head pointer
-current = head;
- while(current!=NULL){
-    cout<<current->data<<endl;
-    current = current->next;
-  }
 }
