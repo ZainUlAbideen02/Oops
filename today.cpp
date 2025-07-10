@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 class Node{
@@ -13,46 +15,6 @@ class Node{
 };
 
 
-//Deleting the First Node by pointers of LinkedList
-Node * deleteFirstNode(Node * head){
-  if(head!=NULL){
-    Node * temp = head;
-    head = head->next;
-    delete temp;
-  }
-  return head;
-}
-
-
-//Deleting the Last Node by pointers of LinkedList
-Node * deletingLastNode(Node * head){
-  Node * temp = head;
-  Node * prev = NULL;
-
-  while(temp->next!=NULL){
-    prev = temp;
-    temp = temp->next;
-  }
-
-  delete temp;
-  prev->next = NULL;
-  return head;
-}
-
-//Deleting the nth Node by pointers of LinkedList
-Node * DeletingnthNode(Node * head,int position){
-    Node * temp = head;
-    Node * prev = NULL;
-
-  for (int i = 0 ; i < position-1;i++){
-    prev = temp;
-    temp = temp->next;
-  }
-    prev->next = temp->next;
-    delete temp;
-    return head;
-}
-
 //Backward adding using Recursion [1,2,3,4,...]
 Node * BackwardLinkedlist(int array [],int size,int index){
   //Base Case
@@ -65,31 +27,55 @@ Node * BackwardLinkedlist(int array [],int size,int index){
 }
 
 
+//Function For Just Reversing the values of the Linkedlist
+Node * ReverseLinkedListValues(Node * head){
+  Node * temp = head;
+
+ vector <int> store; 
+
+  while(temp){
+    store.push_back(temp->data);
+    temp = temp->next;
+  }
+
+  temp = head;
+
+  reverse(store.begin(),store.end());
+   int i = 0;
+   while(temp){
+    temp->data = store[i++];
+    temp = temp->next;
+   }
+   return head;
+}
+
+
 int main(){
   int array [] = {2,4,6,8};
   
   Node * head ;
   head = NULL;
 
-//For Backward of array
+//For Backward assigning of array to LinkedList [1,2,3,4...]
   head = BackwardLinkedlist(array,4,0);
    
-  Node * temp = head;
-
-  //Printing Before the nth Node deletion
+//Printing Before the Reversing of LinkedList
+   Node * temp = head;
   while(temp){
-    cout<<temp->data<<endl;
+    cout<<" Value :"<<temp->data<<" Address :"<<temp<<endl;
     temp = temp->next;
   }
-  cout<<endl;
+    cout<<endl;
 
-  //Deleting the nth Node , where as 2 can also be any other postion
-  head  = DeletingnthNode(head,2);
+//Reversing
+  head = ReverseLinkedListValues(head);
 
-  //Printing After the nth Node deletion
-  temp = head ;
+//Reassiging head pointer to temp pointer , just to print
+  temp = head;
+
+  //Printing After the Reversing of LinkedList
   while(temp){
-    cout<<temp->data<<endl;
+  cout<<" Value :"<<temp->data<<" Address :"<<temp<<endl;
     temp = temp->next;
   }
 
