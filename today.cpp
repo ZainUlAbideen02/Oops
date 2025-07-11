@@ -24,33 +24,35 @@ Node * BackwardLinkedlist(int array [],int size,int index){
   return temp;
 }
 
+//Rotating The LinkedList by nth Position 
+Node * RotateLinkedListbyNthPosition(Node * head,int position){
+   if (head == NULL) return NULL;
+   if (position == 0) return head;
+   int count = 0;
+   Node * temp = NULL;
+    temp = head;
 
-//Function To Find the Middle of the LinkedList
-Node * MiddleOfLinkedList(Node * head){
-    int count = 0;
-  Node * temp = head;
-  while(temp){
-    count++;
-    temp = temp->next;
-  }
-  if(count%2==1){
-    temp = head;
-   count = (count/2)+1;
-   while(count-1){
-     count--;
-     temp = temp->next;
-   }
-   return temp;
-  }
-  else{
-    temp = head;
-   count = (count/2)+1;
-   while(count-1){
-    count--;
-     temp = temp->next;
-   }
-   return temp;
-  }
+    while(temp){
+      temp = temp->next;
+      count++;
+    }
+
+    position = position % count;
+    Node * prev = NULL;
+    Node * current = head;
+    for (int i = 1 ; i <=count-position;i++){
+        prev = current;
+        current = current->next;
+    }
+     prev->next = NULL;
+     Node * last = current;
+
+     while(last->next!=NULL){
+      last = last->next;
+     }
+     last->next = head;
+     head = current;
+     return head;
 }
 
 
@@ -71,9 +73,17 @@ int main(){
   }
     cout<<endl;
 
-//Function Callings
-  temp = MiddleOfLinkedList(head);
-//Printing its Middle Value and its Addresss
-  cout<<"Value : "<<temp->data<<" Address : "<<temp<<endl;
+//nth Postion by which LinkedList is to Rotate e.g ; 3
+    int position = 3;
+
+//Function Calling
+   temp = RotateLinkedListbyNthPosition(head,position);
+
+//Printing After the Linkedlist is Rotated by nth Position
+   while(temp){
+    cout<<" Value :"<<temp->data<<" Address :"<<temp<<endl;
+    temp = temp->next;
+  }
+
 
 }
