@@ -1,6 +1,4 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
 using namespace std;
 
 class Node{
@@ -27,39 +25,45 @@ Node * BackwardLinkedlist(int array [],int size,int index){
 }
 
 
-//Function For Just Reversing the values of the Linkedlist
-Node * ReverseLinkedListValues(Node * head){
+//Function To Find the Middle of the LinkedList
+Node * MiddleOfLinkedList(Node * head){
+    int count = 0;
   Node * temp = head;
-
- vector <int> store; 
-
   while(temp){
-    store.push_back(temp->data);
+    count++;
     temp = temp->next;
   }
-
-  temp = head;
-
-  reverse(store.begin(),store.end());
-   int i = 0;
-   while(temp){
-    temp->data = store[i++];
-    temp = temp->next;
+  if(count%2==1){
+    temp = head;
+   count = (count/2)+1;
+   while(count-1){
+     count--;
+     temp = temp->next;
    }
-   return head;
+   return temp;
+  }
+  else{
+    temp = head;
+   count = (count/2)+1;
+   while(count-1){
+    count--;
+     temp = temp->next;
+   }
+   return temp;
+  }
 }
 
 
 int main(){
-  int array [] = {2,4,6,8};
+  int array [] = {2,4,6,8,9,10};
   
   Node * head ;
   head = NULL;
 
 //For Backward assigning of array to LinkedList [1,2,3,4...]
-  head = BackwardLinkedlist(array,4,0);
+  head = BackwardLinkedlist(array,6,0);
    
-//Printing Before the Reversing of LinkedList
+//Printing Before the Finding of the Middle of the LinkedList
    Node * temp = head;
   while(temp){
     cout<<" Value :"<<temp->data<<" Address :"<<temp<<endl;
@@ -67,16 +71,9 @@ int main(){
   }
     cout<<endl;
 
-//Reversing
-  head = ReverseLinkedListValues(head);
-
-//Reassiging head pointer to temp pointer , just to print
-  temp = head;
-
-  //Printing After the Reversing of LinkedList
-  while(temp){
-  cout<<" Value :"<<temp->data<<" Address :"<<temp<<endl;
-    temp = temp->next;
-  }
+//Function Callings
+  temp = MiddleOfLinkedList(head);
+//Printing its Middle Value and its Addresss
+  cout<<"Value : "<<temp->data<<" Address : "<<temp<<endl;
 
 }
