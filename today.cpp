@@ -40,6 +40,24 @@ Node * deleteLastNode(Node * head){
 
 }
 
+//Function for Deletion of Nth Node of Double LinkedList
+Node * DeletingNthNode(Node * head,int position){
+   Node * temp = head;
+   Node * prev = NULL;
+   position = position-1;
+   while(position--){
+      prev = temp;
+      temp = temp->next;
+   }
+   Node * next = temp;
+   prev->next = temp->next;
+   next->prev = prev;
+   delete temp;
+
+   return head;
+
+}
+
 int main(){
 
 int array [] = {1,2,3,4,5};
@@ -67,17 +85,17 @@ for(int i = 0 ; i < 5;i++){
 //Making a new pointer to tranverse the Linkedlist and print it out
 Node *  current = head;
 
-//Printing The Doubled LinkedList before First Node deletion
+//Printing The Doubled LinkedList before nth Node deletion
 while(current){
   cout<<current->data<<endl;
   current= current->next;
 }
 cout<<endl;
 
-//Function calling for Last Node deletion
-current = deleteLastNode(head);
+//Function calling for nth Node deletion
+current = DeletingNthNode(head,2);
 
-//Printing The Doubled LinkedList After First Node deletion
+//Printing The Doubled LinkedList nth First Node deletion
 while(current){
   cout<<current->data<<endl;
   current= current->next;
