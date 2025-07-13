@@ -15,48 +15,28 @@ class Node{
   }
 };
 
-
-//Function to insert a Node at nth Position in Double LinkedList
-Node * insertionAtNthPosition(Node * head,int position,int value){
-  if(head==NULL){
-    return head;
-  }
-  if(position <=0){
-    return head;
-  }
-
-  Node * current = head;
-  Node * prev = NULL;
-
-  for(int i = 0  ; i < position-1;i++){
-     prev = head;
-     current = current->next;
-  }
-
-  Node * temp = new Node (value);
-  prev->next  = temp;
-  temp->prev=prev;
-  temp->next = current;
-  current->prev=temp;
-
+//Function for Deletion of first Node of Double LinkedList
+Node * deleteFirstNode(Node * head ){
+  Node * temp = head;
+  head = head->next;
+  head->prev = NULL;
+  delete temp;
   return head;
-  
 }
-
 
 int main(){
 
-int array [] = {1,3,4,5};
+int array [] = {1,2,3,4,5};
 
 //Making pointer to track and tranverse Linkedlist
 Node * head = NULL;
 Node * lastNode = NULL;
 
 //Loop to Make and assign values to the Linkedlist
-for(int i = 0 ; i < 4;i++){
+for(int i = 0 ; i < 5;i++){
   //Creating Head
   if(head==NULL){
-    head = new Node(array[i]);
+    head = new Node(array[i]); 
     lastNode = head;
   }
   //Creating Nodes next to the head such as tail
@@ -69,25 +49,22 @@ for(int i = 0 ; i < 4;i++){
 }
 
 //Making a new pointer to tranverse the Linkedlist and print it out
-Node * current = head;
+Node *  current = head;
 
-//Printing The Doubled LinkedList before insertion at nth Position
+//Printing The Doubled LinkedList before First Node deletion
+while(current){
+  cout<<current->data<<endl;
+  current= current->next;
+}
+cout<<endl;
+
+//Function calling for First Node deletion
+current = deleteFirstNode(head);
+
+//Printing The Doubled LinkedList After First Node deletion
 while(current){
   cout<<current->data<<endl;
   current= current->next;
 }
 
-//Creating new Pointer to catch Address of head after function call
-Node * temp = NULL;
-temp = insertionAtNthPosition(head,2,2);
-current = temp;
-
-//Printing The Doubled LinkedList After the insertion at nth Position
-while(current){
-  cout<<current->data<<endl;
-  current= current->next;
 }
-
-}
-
-
