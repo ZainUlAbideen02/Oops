@@ -15,58 +15,7 @@ class Node{
   }
 };
 
-//Function to remove duplicate values
-Node* removeDuplicate(Node* head) {
-    if (head == NULL) return NULL;
 
-    int array[1000];
-    int count = 0;
-
-    Node* temp = head;
-    while (temp != NULL) {
-        array[count++] = temp->data;
-        temp = temp->next;
-    }
-
-    int newarray[1000];
-    int n = 0;
-
-    for (int i = 0; i < count; i++) {
-        bool isDuplicate = false;
-        for (int j = 0; j < n; j++) {
-            if (array[i] == newarray[j]) {
-                isDuplicate = true;
-                break;
-            }
-        }
-        if (!isDuplicate) {
-            newarray[n++] = array[i];
-        }
-    }
-
-    // Rewrite values in existing nodes
-    temp = head;
-    int i = 0;
-    while (i < n && temp != NULL) {
-        temp->data = newarray[i++];
-        temp = temp->next;
-    }
-
-    // Delete remaining extra duplicate nodes
-    Node* current = temp;
-    Node* prevNode = (temp != NULL) ? temp->prev : NULL;
-
-    while (current != NULL) {
-        Node* nextNode = current->next;
-        delete current;
-        current = nextNode;
-    }
-
-    if (prevNode != NULL)
-        prevNode->next = NULL;
-
-    return head;
-}
 
 int main(){
 
