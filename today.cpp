@@ -15,59 +15,69 @@ class Node{
   }
 };
 
-//Function for Deletion of first Node of Double LinkedList
-Node * deleteFirstNode(Node * head ){
-  Node * temp = head;
-  head = head->next;
-  head->prev = NULL;
-  delete temp;
-  return head;
-}
+//Function to remove duplicate values
+Node* removeDuplicate(Node* head) {
+    if (head == NULL) return NULL;
 
-//Function for Deletion of Last Node of Double LinkedList
-Node * deleteLastNode(Node * head){
-  Node * prev = NULL;
-  Node * temp = head;
+    int array[1000];
+    int count = 0;
 
-  while(temp->next){
-    prev = temp;
-    temp = temp->next;
-  }
+    Node* temp = head;
+    while (temp != NULL) {
+        array[count++] = temp->data;
+        temp = temp->next;
+    }
 
-  prev->next = NULL;
-  delete temp;
-  return head;
+    int newarray[1000];
+    int n = 0;
 
-}
+    for (int i = 0; i < count; i++) {
+        bool isDuplicate = false;
+        for (int j = 0; j < n; j++) {
+            if (array[i] == newarray[j]) {
+                isDuplicate = true;
+                break;
+            }
+        }
+        if (!isDuplicate) {
+            newarray[n++] = array[i];
+        }
+    }
 
-//Function for Deletion of Nth Node of Double LinkedList
-Node * DeletingNthNode(Node * head,int position){
-   Node * temp = head;
-   Node * prev = NULL;
-   position = position-1;
-   while(position--){
-      prev = temp;
-      temp = temp->next;
-   }
-   Node * next = temp;
-   prev->next = temp->next;
-   next->prev = prev;
-   delete temp;
+    // Rewrite values in existing nodes
+    temp = head;
+    int i = 0;
+    while (i < n && temp != NULL) {
+        temp->data = newarray[i++];
+        temp = temp->next;
+    }
 
-   return head;
+    // Delete remaining extra duplicate nodes
+    Node* current = temp;
+    Node* prevNode = (temp != NULL) ? temp->prev : NULL;
 
+    while (current != NULL) {
+        Node* nextNode = current->next;
+        delete current;
+        current = nextNode;
+    }
+
+    if (prevNode != NULL)
+        prevNode->next = NULL;
+
+    return head;
 }
 
 int main(){
 
-int array [] = {1,2,3,4,5};
+int array [] = {1,2,4,3,1,3,2,3,4,5,5,3,2};
 
 //Making pointer to track and tranverse Linkedlist
 Node * head = NULL;
 Node * lastNode = NULL;
 
 //Loop to Make and assign values to the Linkedlist
-for(int i = 0 ; i < 5;i++){
+for(int i = 0 ; i < 13;i++){
   //Creating Head
   if(head==NULL){
     head = new Node(array[i]); 
@@ -85,20 +95,19 @@ for(int i = 0 ; i < 5;i++){
 //Making a new pointer to tranverse the Linkedlist and print it out
 Node *  current = head;
 
-//Printing The Doubled LinkedList before nth Node deletion
+//Printing The Doubled LinkedList before duplication removal
 while(current){
   cout<<current->data<<endl;
   current= current->next;
 }
 cout<<endl;
 
-//Function calling for nth Node deletion
-current = DeletingNthNode(head,2);
+//Function Call
+current = removeDuplicate(head);
 
-//Printing The Doubled LinkedList nth First Node deletion
+//Printing The Doubled LinkedList after duplication removal
 while(current){
   cout<<current->data<<endl;
   current= current->next;
 }
-
 }
