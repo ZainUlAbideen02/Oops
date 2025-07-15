@@ -1,62 +1,51 @@
 #include <iostream>
 using namespace std;
 
-//Double Linkedlist
+//Single LinkedList
 class Node{
   public:
   int data;
-  Node * prev;
   Node * next;
 
   Node (int value){
      data = value;
      next = NULL;
-     prev = NULL;
   }
 };
 
 
 
 int main(){
+  int array [] = {1,2,3,4,5};
 
-int array [] = {1,2,4,3,1,3,2,3,4,5,5,3,2};
+  int count = 0 ;
+  Node * head = NULL;
+  Node * current = NULL;
 
-//Making pointer to track and tranverse Linkedlist
-Node * head = NULL;
-Node * lastNode = NULL;
+     // Building circular singly linked list
+  for (int i = 0; i < 5; i++) {
+        Node* temp = new Node(array[i]);
+        if (head == NULL) {
+            head = temp;
+            current = head;
+        } else {
+            current->next = temp;
+            current = current->next;
+        }
+    }
+       // Make it circular
+    current->next = head;
 
-//Loop to Make and assign values to the Linkedlist
-for(int i = 0 ; i < 13;i++){
-  //Creating Head
-  if(head==NULL){
-    head = new Node(array[i]); 
-    lastNode = head;
+   Node * temp = head;
+   
+   // Print 5 elements only (avoid infinite loop)
+  for (int i = 0 ; i<5;i++){
+     cout<<temp->data<<"  Address : "<<temp<<endl;
+    temp = temp->next;
   }
-  //Creating Nodes next to the head such as tail
-  else{
-    Node * temp = new Node (array[i]);
-    lastNode->next=temp;
-    temp->prev=lastNode;
-    lastNode = temp;
-  }
-}
 
-//Making a new pointer to tranverse the Linkedlist and print it out
-Node *  current = head;
+   cout << "\nHead Address: " << head << endl;
+   cout << "Next of last node (should be head): " << current->next << endl;
+  
 
-//Printing The Doubled LinkedList before duplication removal
-while(current){
-  cout<<current->data<<endl;
-  current= current->next;
-}
-cout<<endl;
-
-//Function Call
-current = removeDuplicate(head);
-
-//Printing The Doubled LinkedList after duplication removal
-while(current){
-  cout<<current->data<<endl;
-  current= current->next;
-}
 }
