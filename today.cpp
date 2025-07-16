@@ -44,8 +44,7 @@ int main(){
     temp = temp->next;
   }
 
-   cout << "\nHead Address: " << head << endl;
-   cout << "Next of last node (should be head): " << current->next << endl;
+  
   
 
 }
