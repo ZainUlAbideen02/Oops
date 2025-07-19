@@ -54,5 +54,9 @@ int main(){
      cout<<temp->data<<"  Address : "<<temp<<endl;
     temp = temp->next;
   }
+    for (int i = 0 ; i<5;i++){
+     cout<<temp->data<<"  Address : "<<temp<<endl;
+    temp = temp->next;
+  }
 
 }
