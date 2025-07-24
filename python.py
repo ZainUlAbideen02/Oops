@@ -1,2 +1,3 @@
-n = input("What's Your Name ? ")
-print("hello , ",n)
+n = "Zain"
+
+print(len(n))
