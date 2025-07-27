@@ -1,127 +1,153 @@
-
-
-#Print your name, age, and favorite number.
-# name = input("Enter Your Name : ")
-# print("My Name is :",name)
-
-# age = int(input("Enter Your Age : "))
-# print("My Age is :",age)
-
-# num = input("Enter Your Favourite Number : ")
-# print("My Favourite Number is :",num)
-
-
-
-#Take two numbers from the user and print their sum, difference, and product.
-# num1 = int(input("Enter First Number : "))
-# num2 = int(input("Enter Second Number : "))
-
-# print("The sum of two numbers is :",num1+num2)
-# print("The differnce of two numbers is :",num1-num2)
-# print("The product of two numbers is :",num1*num2)
-
-
-
-# #Take input of radius and calculate the area of a circle.
-# radius = float(input("Enter the Radius of the Circle : "))
-# print("The Area of the Circle is :",3.14*radius*radius)
-
-
-# #Ask the user for their birth year and calculate their age.
-# birth_year = int(input("Enter Your Birth Year :"))
-# current_year = 2025
-# print("Your are",current_year-birth_year,"Years Old.")
-
-
-# #Convert temperature from Celsius to Fahrenheit.
-# celcius = float(input("Enter The Temperature in Celcius :"))
-# Farenheit = (celcius * 9/5)+32
-# print("This temperature in Farenheit is : ",Farenheit)
-
-
-#Check whether a number is even or odd.
-# num = int(input("Enter a num to check weither it is Even or Odd"))
-# if num%2==0 :
-#     print(" The number is Even.")
-# else :
-#     print(" The number is Odd.")
-
-#Check if a number is divisible by both 3 and 5.
-# num = int(input("Enter a num to check weither it Divisible by both 3 and 5"))
-# if num%3==0 and num%5==0 :
-#     print("The number is Divisible by both 3 and 5")
-# else :
-#     print("The number is not Divisible by both 3 and 5")
-
-
-#Take marks of 3 subjects and print pass/fail (pass if each >=33 and avg >=40).
-# sub1 = int(input("Enter marks of subject 1"))
-# sub2 = int(input("Enter marks of subject 2"))
-# sub3 = int(input("Enter marks of subject 3"))
-# avg = sub1+sub2+sub3/3
-# if sub1>=33 and sub2>=33 and sub3>=33 and avg>=40:
-#  print("Pass")
-# else:
-#   print("Fail")
-
-# num1 = int(input("Enter number 1 : "))
-# num2 = int(input("Enter number 2 : "))
-# operation = int(input("Enter the Operation You want to perform : 1.(+) , 2.(-) , 3.(*) , 4.(/)"))
-# if operation !=1 and operation !=2 and operation !=3 and operation !=4 :
-#     print("Choose a valid Operation")
-# else:
-#     if operation == 1:
-#         print("The Sum of these numbers is : ",num1+num2)
-#     elif operation == 2:
-#         print("The Difference of these numbers is : ",num1-num2)
-#     elif operation == 3:
-#         print("The Product of these numbers is : ",num1*num2)
+#Write a loop that prints numbers from 1 to 20 but skips multiples of 4.
+# for i in range(1,21,1):
+#     if i%4==0:
+#         continue
 #     else:
-#         print("The Division of these numbers is : ",num1/num2)
+#         print(i)
 
+#Take input until the user enters "exit". Skip empty inputs using continue.
+# take = input("Enter exit to exit .")
+# while(take!="exit"):
+#     take = input("Enter exit to exit .")
+#     if take == " ":
+#         continue
+#     if take == "exit":
+#         break
 
-#Check if a year is a leap year.
-# year = int(input("Enter Year to check for Leap :- "))
-# if (year%4==0) and (year%100!=0) or (year%400==0):
-#     print("Its a Leap Year")
-# else:
-#     print("Its Not a Leap Year")
+#Print all numbers from 1 to 50. Stop printing when you encounter a number divisible by 13 using break.
+# for i in range(1,51,1):
+#     if i%13==0:
+#         break
+#     else:
+#         print(i)
 
+#Write a function to check if a number is even or odd.
+# def checker(a):
+#     if a%2==0:
+#         print("The number is even.")
+#     else:
+#         print("The number is odd.")
 
-#Print multiplication table of any number using for loop.
-# for i in range(1,11):
-#     print(2," x ",i," = ",2*i)
+# num = int(input("Enter a number to check for even or odd ..."))
+# checker(num)
 
-#Print all even numbers from 1 to 100 using for and while loops.
-# for i in range(0,101,2):
-#     print(i," ")
+#Write a function that takes name and age as arguments and prints a greeting message.
+# def greetings(name,age):
+#     print(f"Hey {name} , Congratulation on becoming of {age} year old.")
+# name = input("Enter Your name:-")
+# age  = int(input("Enter Your age:-"))
 
-# num = 0
-# while num < 101 :
-#     print(num)
-#     num = num+2
+# greetings(name,age)
 
+#Write a function to find the factorial of a number using loops.
+# def factorial(num):
+#     total = 1
+#     for i in range(1,num+1):
+#         total*=i
+#     return total
 
-#Sum of first N natural numbers using a for loop.
-# sum = 0 
-# n = 100
-# for i in range(1,101,1):
-#     sum+=i
-# print("The sum of first 100 Natural Numbers is :- ",sum)
+# num = int(input("Enter the number to find the factorial:-"))
+# print(f'The factorial of {num} is :',factorial(num))
 
+#Create a list of your 5 favorite movies and print them one by one.
+# movies = ["Money Heist","Wednesday Addams","The Last Kingdom","The Queens's Gambit","Top Gun Mavrik"]
+# for i in movies:
+#     print(i)
 
-#Find factorial of a number using a loop.
-# num = 5
-# calculate = 1
-# for i in range(1,6,1):
-#     calculate*=i
-# print("The Factorial of 5 is :- ",calculate)
+#Access the last element of the list using negative indexing.
+# movies = ["Money Heist","Wednesday Addams","The Last Kingdom","The Queens's Gambit","Top Gun Mavrik"]
+# print(movies[len(movies)-1])
 
+#Slice the first 3 items of a list using slicing.
+# movies = ["Money Heist","Wednesday Addams","The Last Kingdom","The Queens's Gambit","Top Gun Mavrik"]
+# print(movies[0])
+# print(movies[1])
+# print(movies[2])
 
-#Print this pattern using loops:
-# for i in range(1,6,1):
-#     for j in range(i):
-#         print("*",end=" ")
-#     print()
+# #Make a list of numbers 
+# numbers = [1,3,23,19,2,54,27,76,44]
+# print(numbers)
+# #Append 99 to the end
+# numbers.append(99)
+# print(numbers)
+# #Insert 0 at the beginning
+# numbers.insert(0,0)
+# print(numbers)
+# #Sort the list in descending order
+# numbers.sort(reverse=True)
+# print(numbers)
+# #Remove the largest number
+# numbers.remove(numbers[0])
+# print(numbers)
 
+#Create a list of guests. Add and remove guests dynamically using .append() and .remove().
+# guests = ["Zain","Zunaira"]
+# print(guests)
+# guests.append("Ammara")
+# print(guests)
+# guests.append("Asmara")
+# print(guests)
+# guests.remove(guests[0])
+# print(guests)
 
+#Create a tuple of 4 items and print the second and last item.
+# tuple = (1,2,3,4)
+# print(type(tuple))
+# print(tuple)
+# print(tuple[1])
+# print(tuple[3])
+
+#Write a function that accepts a tuple and returns the sum of all numeric values.
+# def sum(tuple):
+#     count = 0
+#     for i in tuple:
+#         count+=i
+#     return count
+# tuple = (1,2,3,4)
+# print("The sum of the tuple is :",sum(tuple))
+
+#Try modifying a tuple element. What happens?
+# tuple = (1,2,3,4)
+# tuple[0] = 5
+# print(tuple)
+
+#Count how many times 7 appears in this tuple: (1, 7, 2, 7, 3, 4, 7)
+# tuple = (1, 7, 2, 7, 3, 4, 7)
+# print(tuple.count(7))
+
+#Concatenate two tuples: t1 = (1, 2) and t2 = (3, 4)
+# t1 = (1, 2)
+# t2 = (3, 4)
+# t3 = t1+t2
+# print(t3)
+
+#Slice the tuple: print every second item from the tuple.
+# tuple = (1, 7, 2, 7, 3, 4, 7)
+# for i in range(0,len(tuple),2):
+#     print(tuple[i])
+
+#Print a report card like:
+# Name = "Ali" 
+# Math = 90 
+# English =  85 
+# Total = 175
+# print(f"Name: {Name} | Math: {Math} | English: {English} | Total: {Total}")
+
+#Create a set of 5 unique student names. Try adding a duplicate—what happens?
+# set = {"Zain","Zunaira","Ammara","Asmara","Zain"}
+# print(type(set))
+# print(set)
+# set.add("Ammara")
+# print(set)
+
+#Print union, intersection, and difference
+# a = {1, 2, 3, 4}
+# b = {3, 4, 5, 6}
+# print(a.union(b))
+# print(a.intersection(b))
+# print(a.difference(b))
+
+#Remove duplicates from a list using set().
+# my_list = [1, 2, 2, 3, 4, 4, 5]
+# unique_list = list(set(my_list))
+# print(unique_list) 
