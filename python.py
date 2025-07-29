@@ -140,14 +140,13 @@ print(set)
 set.add("Ammara")
 print(set)
 
-Print union, intersection, and difference
 a = {1, 2, 3, 4}
 b = {3, 4, 5, 6}
 print(a.union(b))
 print(a.intersection(b))
 print(a.difference(b))
 
-Remove duplicates from a list using set().
+
 my_list = [1, 2, 2, 3, 4, 4, 5]
 unique_list = list(set(my_list))
 print(unique_list) 
