@@ -97,7 +97,7 @@ print(tuple)
 print(tuple[1])
 print(tuple[3])
 
-Write a function that accepts a tuple and returns the sum of all numeric values.
+
 def sum(tuple):
     count = 0
     for i in tuple:
@@ -133,7 +133,7 @@ English =  85
 Total = 175
 print(f"Name: {Name} | Math: {Math} | English: {English} | Total: {Total}")
 
-Create a set of 5 unique student names. Try adding a duplicate—what happens?
+
 set = {"Zain","Zunaira","Ammara","Asmara","Zain"}
 print(type(set))
 print(set)
