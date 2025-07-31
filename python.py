@@ -76,7 +76,7 @@ print(numbers)
 #Sort the list in descending order
 numbers.sort(reverse=True)
 print(numbers)
-#Remove the largest number
+
 numbers.remove(numbers[0])
 print(numbers)
 
