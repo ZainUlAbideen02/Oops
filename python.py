@@ -90,7 +90,6 @@ print(guests)
 guests.remove(guests[0])
 print(guests)
 
-Create a tuple of 4 items and print the second and last item.
 tuple = (1,2,3,4)
 print(type(tuple))
 print(tuple)
