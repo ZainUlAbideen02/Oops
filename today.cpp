@@ -1,4 +1,5 @@
 #include <iostream>
+#include<vector>
 using namespace std;
 
 //Single LinkedList
@@ -13,89 +14,62 @@ class Node{
   }
 };
 
-
+bool check(vector<Node *>visited,Node * curr){
+   for(int i = 0 ; i<visited.size();i++ ){
+      if(visited[i]==curr){
+         return 1;
+      }
+   }
+   return 0 ;
+}
 
 int main(){
-  int array [] = {1,2,3,4,5};
+   int array [] = {1,2,3,4,5};
+   Node * head = NULL;
+   Node * current = NULL;
 
-  int count = 0 ;
-  Node * head = NULL;
-  Node * current = NULL;
+   for(int i = 0 ; i <5;i++){
+      Node * temp = new Node(array[i]);
+      if(head==NULL){
+         head = temp;
+         current = temp;
+      }
+      else{
+         current->next = temp;
+         current = current->next;
+      }
+   }
 
-     // Building circular singly linked list
-  for (int i = 0; i < 5; i++) {
-        Node* temp = new Node(array[i]);
-        if (head == NULL) {
-            head = temp;
-            current = head;
-        } else {
-            current->next = temp;
-            current = current->next;
-        }
-    }
-       // Make it circular
-    current->next = head;
+   current->next= head;
 
-   Node * temp = head;
+   Node * curr = head;
+   vector <Node *> visited;
+
+   while(curr!=NULL){
+      if(check(visited,curr)){
+        cout << "Cycle detected!" << endl;
+         return 0;
+      }
+      visited.push_back(curr);
+      curr = curr->next;
+   }
    
-   // Print 5 elements only (avoid infinite loop)
-  for (int i = 0 ; i<5;i++){
-     cout<<temp->data<<"  Address : "<<temp<<endl;
-    temp = temp->next;
-  }
 
 
-    for (int i = 0 ; i<5;i++){
-     cout<<temp->data<<"  Address : "<<temp<<endl;
-    temp = temp->next;
-    temp = temp ;
-  }
+   // Node* temp = head;
+   // if(temp != NULL){
+   //    do {
+   //       cout << temp->data << endl;
+   //       temp = temp->next;
+   //    } while(temp != head);
+   // }
+
+
+
+}
+
+
 
 
   
-    for (int i = 0 ; i<5;i++){
-     cout<<temp->data<<"  Address : "<<temp<<endl;
-    temp = temp->next;
-    temp = temp ;
-  }
-  
-    for (int i = 0 ; i<5;i++){
-     cout<<temp->data<<"  Address : "<<temp<<endl;
-    temp = temp->next;
-    temp = temp ;
-  }
-
-  
-    for (int i = 0 ; i<5;i++){
-     cout<<temp->data<<"  Address : "<<temp<<endl;
-    temp = temp->next;
-    temp = temp ;
-  }
-  
-    for (int i = 0 ; i<5;i++){
-     cout<<temp->data<<"  Address : "<<temp<<endl;
-    temp = temp->next;
-    temp = temp ;
-  }
-  
-    for (int i = 0 ; i<5;i++){
-     cout<<temp->data<<"  Address : "<<temp<<endl;
-    temp = temp->next;
-    temp = temp ;
-  }
-  
-    for (int i = 0 ; i<5;i++){
-     cout<<temp->data<<"  Address : "<<temp<<endl;
-    temp = temp->next;
-    temp = temp ;
-  }
-  
-    for (int i = 0 ; i<5;i++){
-     cout<<temp->data<<"  Address : "<<temp<<endl;
-    temp = temp->next;
-    temp = temp ;
-  }
-
-
-  }
 
