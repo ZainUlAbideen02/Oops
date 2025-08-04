@@ -1,115 +1,128 @@
 #include <iostream>
-#include <unordered_map>
 using namespace std;
 
-//Single LinkedList
+// Single LinkedList Node definition
 class Node{
   public:
-  int data;
-  Node * next;
+  int data;       // Data stored in the node
+  Node * next;    // Pointer to the next node
 
+  // Constructor to initialize node with a value
   Node (int value){
      data = value;
      next = NULL;
   }
 };
 
-//To Print the LinkedList
+// Function to print the linked list
 void print(Node * head){
     Node * temp3 = head;
-   while(temp3!=NULL){
-      cout<<temp3->data<<" ";
-      temp3 = temp3->next;
-   }
+    while(temp3 != NULL){
+        cout << temp3->data << " ";  // Print current node's data
+        temp3 = temp3->next;         // Move to the next node
+    }
 }
 
+// Function to reverse a linked list
+Node* reverse(Node* head) {
+    Node* prev = NULL;     // Previous node pointer (initially null)
+    Node* curr = head;     // Current node pointer
+    Node* next = NULL;     // Next node pointer
+
+    // Traverse the list and reverse the links
+    while (curr != NULL) {
+        next = curr->next;    // Store next node
+        curr->next = prev;    // Reverse current node's link
+        prev = curr;          // Move prev to current node
+        curr = next;          // Move to next node
+    }
+
+    return prev;  // New head of the reversed list
+}
 
 int main(){
-   //Array , Whose Values is in LinkedList
-   int array [] = {1,2,3,4,5,6,7,8,9,10};
+   // Arrays representing two numbers (digits stored in reverse order)
+   int array1 [] = {9,7,6,8,4};   // Represents number 48679
+   int array2 [] = {6,4,3,8};     // Represents number 8346
 
-   //Making Pointer to Point & Tranverse the Linkedlist
-   Node * head = NULL;
+   // Initialize pointers for first linked list
+   Node * head1 = NULL;
    Node * current = NULL;
   
-   //Counting the Total Length of the array
-   int totallength = sizeof(array) / sizeof(array[0]);
+   // Length of array1
+   int totallength = sizeof(array1) / sizeof(array1[0]);
 
-   //Assigning Values 
-   for(int i = 0 ; i <totallength;i++){
-
-      Node * temp = new Node(array[i]);
-      if(head==NULL){
-         head = temp;
+   // Convert array1 to linked list
+   for(int i = 0 ; i < totallength; i++){
+      Node * temp = new Node(array1[i]);  // Create new node
+      if(head1 == NULL){
+         head1 = temp;        // First node becomes head
          current = temp;
       }
       else{
-         current->next = temp;
+         current->next = temp;  // Append to list
          current = current->next;
       }
    }
-   //Pointer to point to the Node Where Loop is to create 
-   //Suppose We Create Loop at 3rd Position
-   Node * temp = head;
-   for(int i = 0 ; i < 3;i++){
-      temp=temp->next;
+
+   // Reuse current pointer for second list
+   current = NULL;
+   Node * head2 = NULL;
+
+   // Length of array2
+   totallength = sizeof(array2) / sizeof(array2[0]);
+
+   // Convert array2 to linked list
+   for(int i = 0 ; i < totallength; i++){
+      Node * temp = new Node(array2[i]);  // Create new node
+      if(head2 == NULL){
+         head2 = temp;        // First node becomes head
+         current = temp;
+      }
+      else{
+         current->next = temp;  // Append to list
+         current = current->next;
+      }
    }
-   current->next=temp;
+   
+   // Reverse both linked lists to make addition easier (least significant digit first)
+   Node * temp = head1;
+   head1 = reverse(temp);
+   temp = head2;
+   head2 = reverse(temp);
 
-    //Going to Use Floyd’s Cycle Detection Algorithm to detect the loop.
-      Node * slow = head;
-      Node * fast = head;
+   // Prepare for addition
+   temp = head1;
+   Node * temp2 = head2;
+   Node * head3 = NULL;   // Head of the result list
+   Node * curr = NULL;    // Pointer to track current node in result
+   int carry = 0;         // Carry value for digit-wise addition
 
-   //To Count the Length Of the Loop
-      int looplen = 1;
+   // Add digits from both lists with carry
+   while(temp != NULL || temp2 != NULL || carry > 0){
+       int val1 = (temp != NULL) ? temp->data : 0;  // Value from first list or 0
+       int val2 = (temp2 != NULL) ? temp2->data : 0;  // Value from second list or 0
+       int sum = val1 + val2 + carry;  // Sum of values and carry
+       carry = sum / 10;               // Update carry
 
-    while(slow!=NULL){
-      
-      //Moving slow pointer one step and fast two steps ahead
-      slow = slow->next;
-      fast = fast->next->next;
-      
-      //If Loops Found,They become equal to each other
-     if(slow==fast){
-      cout<<"Loop Present"<<endl;
-      fast = fast->next;
-      //Calculating the length of the Loop
-       while (fast!=slow)
-       {
-           looplen++;
-         fast=fast->next;
-       }
-       cout<<"The Length Of the Loop is "<<looplen<<endl;
-       
-       //Founding the index of Loop starting Node
-       int newlength = totallength-looplen;
-       cout<<"The Loop Present at Node No."<<newlength<<endl;
-
-       //Pointing the Pointer at the Loop Starter Node
-       Node * temp = head;
-       for(int i = 0 ;i<newlength;i++){
-         temp = temp->next;
-       }
-        
-       //Breaking the Loop 
-       while(fast->next!=temp || fast!=temp){
-         if(fast->next==temp){
-            fast->next=NULL;
-            cout<<"Loop Breaks"<<endl;
-            //Print the LinkedList After breaking the Loop
-            print(head);
-            return 0;
-         }
-         fast=fast->next;
+       Node * newNode = new Node(sum % 10);  // Create node for current digit
+       if(head3 == NULL){
+           head3 = newNode;  // First digit
+           curr = newNode;
+       } else {
+           curr->next = newNode;  // Append to result
+           curr = curr->next;
        }
 
-     }
-     //If Loop is not present
-     if(fast==NULL || fast->next==NULL ){
-      cout<<"No Loop Present"<<endl;
-      return 0;
-     }
-
+       // Move to next nodes if available
+       if (temp != NULL) temp = temp->next;
+       if (temp2 != NULL) temp2 = temp2->next;
    }
 
-   }
+   // Reverse the result list to get final number
+   Node * pr = head3;
+   pr = reverse(pr);
+
+   // Print the result
+   print(pr);
+}
