@@ -1,82 +1,37 @@
 #include <iostream>
+#include <vector>
+#include <stack>
 using namespace std;
 
-class Node {
-public:
-    int data;       
-    Node* next;    
-
-
-    Node(int value) {
-        data = value;
-        next = NULL;
-    }
-};
-
-
-void print(Node* head) {
-    Node* temp3 = head;
-    while (temp3 != NULL) {
-        cout << temp3->data << " "; 
-        temp3 = temp3->next;         
-    }
-}
-
-Node * arrayToLinkedList(int array [],int size){
-    Node* head = NULL;
-    Node* current = NULL;
-
-    for (int i = 0; i < size; i++) {
-        Node* temp = new Node(array[i]);  
-        if (head == NULL) {
-            head = temp;  
-            current = temp;
-        } else {
-            current->next = temp; 
-            current = current->next;
-        }
-    }
-
-    return head;
-}
-
-
 int main() {
+    // Original characters of the word "hello"
+    vector<string> characters;
+    characters.push_back("h");
+    characters.push_back("e");
+    characters.push_back("l");
+    characters.push_back("l");
+    characters.push_back("o");
 
-    int array1[] = {1, 2, 4};  
-    int array2[] = {3,6,8,10};
+    stack<string> charStack;
 
-   int size = sizeof(array1) / sizeof(array1[0]);
-   Node * head1 = arrayToLinkedList(array1,size);
-
-   size = sizeof(array2) / sizeof(array2[0]);
-   Node* head2 = arrayToLinkedList(array2,size);
-    
-
-    Node * temp1 = head1;
-    Node * temp2 = head2;
-
-    Node * head3 = new Node (0);
-    Node * temp3 = head3;
-
-    while(temp1 && temp2){
-      if(temp1->data<temp2->data){
-          temp3->next = temp1;
-          temp1 = temp1->next;
-      }
-      else{
-          temp3->next = temp2;
-          temp2 = temp2->next; 
-      }
-      temp3 = temp3->next; 
-    }
-    if (temp1 != NULL) {
-        temp3->next = temp1;
-    } else {
-        temp3->next = temp2;
+    // Push each character to stack to reverse the order
+    for (int i = 0; i < characters.size(); i++) {
+        charStack.push(characters[i]);
     }
 
-    print(head3->next);
+    // Print top character from stack (should be last character of original word)
+    cout << charStack.top() << endl;
 
+    vector<string> reversedCharacters;
 
+    // Pop from stack and store in reversedCharacters to reverse the original string
+    for (int i = 0; i < characters.size(); i++) {
+        reversedCharacters.push_back(charStack.top());
+        charStack.pop();
+    }
+
+    // Print reversed string
+    for (string ch : reversedCharacters) {
+        cout << ch << " ";
+    }
 }
