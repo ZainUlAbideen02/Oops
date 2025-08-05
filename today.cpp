@@ -4,34 +4,40 @@
 using namespace std;
 
 int main() {
-    // Original characters of the word "hello"
-    vector<string> characters;
-    characters.push_back("h");
-    characters.push_back("e");
-    characters.push_back("l");
-    characters.push_back("l");
-    characters.push_back("o");
+    // Initial values in array (top of stack will be 8, then 1, 2, 3, 4)
+    int inputArray[] = {4, 3, 2, 1, 8};
 
-    stack<string> charStack;
+    stack<int> originalStack;
 
-    // Push each character to stack to reverse the order
-    for (int i = 0; i < characters.size(); i++) {
-        charStack.push(characters[i]);
+    // Push all elements of array into the stack
+    for (int num : inputArray) {
+        originalStack.push(num);
     }
 
-    // Print top character from stack (should be last character of original word)
-    cout << charStack.top() << endl;
+    stack<int> tempStack;
 
-    vector<string> reversedCharacters;
-
-    // Pop from stack and store in reversedCharacters to reverse the original string
-    for (int i = 0; i < characters.size(); i++) {
-        reversedCharacters.push_back(charStack.top());
-        charStack.pop();
+    // Reverse the stack into a temporary stack
+    while (!originalStack.empty()) {
+        tempStack.push(originalStack.top());
+        originalStack.pop();
     }
 
-    // Print reversed string
-    for (string ch : reversedCharacters) {
-        cout << ch << " ";
+    int x = 2;  // Element to insert at the bottom
+
+    // Push new element (x) at the bottom of the stack
+    originalStack.push(x);
+
+    // Restore the original elements above x
+    while (!tempStack.empty()) {
+        originalStack.push(tempStack.top());
+        tempStack.pop();
     }
+
+    // Print final stack from top to bottom
+    while (!originalStack.empty()) {
+        cout << originalStack.top() << " ";
+        originalStack.pop();
+    }
+
+    return 0;
 }
