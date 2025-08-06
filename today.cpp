@@ -3,41 +3,61 @@
 #include <stack>
 using namespace std;
 
+//Minimum add to make the pranthesis valid
+
 int main() {
-    // Initial values in array (top of stack will be 8, then 1, 2, 3, 4)
-    int inputArray[] = {4, 3, 2, 1, 8};
+  vector<string>vec1 = {"a","b","#","c"};
+  vector<string>vec2 = {"a","d","y","c"};
 
-    stack<int> originalStack;
+    stack<string>s1;
+    stack<string>s2;
 
-    // Push all elements of array into the stack
-    for (int num : inputArray) {
-        originalStack.push(num);
+for(int i = 0 ;i<vec1.size();i++){
+    if(vec1[i]=="#"){
+        if(s1.empty()){
+            cout<<"# can't be the First character of your string.";
+            return 1;
+        }
+        s1.pop();
     }
-
-    stack<int> tempStack;
-
-    // Reverse the stack into a temporary stack
-    while (!originalStack.empty()) {
-        tempStack.push(originalStack.top());
-        originalStack.pop();
+    else{
+        s1.push(vec1[i]);
     }
+}
 
-    int x = 2;  // Element to insert at the bottom
-
-    // Push new element (x) at the bottom of the stack
-    originalStack.push(x);
-
-    // Restore the original elements above x
-    while (!tempStack.empty()) {
-        originalStack.push(tempStack.top());
-        tempStack.pop();
+for(int i = 0 ;i<vec2.size();i++){
+    if(vec2[i]=="#"){
+        if(s2.empty()){
+            cout<<"# can't be the First character of your string.";
+            return 1;
+        }
+        s2.pop();
     }
-
-    // Print final stack from top to bottom
-    while (!originalStack.empty()) {
-        cout << originalStack.top() << " ";
-        originalStack.pop();
+    else{
+        s2.push(vec2[i]);
     }
-
-    return 0;
+}
+  int count = 0;
+ if(s1.size()==s2.size()){
+      int size = s1.size();
+    for(int i =0; i<size;i++){
+       if(s1.top()==s2.top()){
+        count++;
+        s1.pop();
+        s2.pop();
+       }
+       else{
+        cout<<"Both strings are not equal."<<endl;
+        return 1;
+       }
+    }
+    if(count==size){
+        cout<<"Both strings are equal."<<endl;
+    }
+ }
+ else{
+    cout<<"The string are not equal to each others."<<endl;
+    return 1;
+ }
+    return 0;  
 }
