@@ -1,63 +1,47 @@
 #include <iostream>
 #include <vector>
-#include <stack>
 using namespace std;
 
-//Minimum add to make the pranthesis valid
-
+// Minimum add to make the parentheses valid
 int main() {
-  vector<string>vec1 = {"a","b","#","c"};
-  vector<string>vec2 = {"a","d","y","c"};
+    vector<string> vec;
 
-    stack<string>s1;
-    stack<string>s2;
+    vec.push_back("(");
+    vec.push_back(")");
+    vec.push_back(")");
+    vec.push_back("(");
+    vec.push_back("(");
+    vec.push_back(")");
+    vec.push_back(")");
+    vec.push_back("(");
+    vec.push_back("(");
+    vec.push_back(")");
+    vec.push_back("(");
+    vec.push_back("(");
+    vec.push_back("(");
+    vec.push_back("(");
 
-for(int i = 0 ;i<vec1.size();i++){
-    if(vec1[i]=="#"){
-        if(s1.empty()){
-            cout<<"# can't be the First character of your string.";
-            return 1;
+    int open = 0;        // Count of unmatched '('
+    int insertions = 0;  // Count of unmatched ')'
+
+    for (int i = 0; i < vec.size(); i++) {
+        if (vec[i] == "(") {
+            open++;
+        } else if (vec[i] == ")") {
+            if (open > 0) {
+                open--;  // matched with an open '('
+            } else {
+                insertions++;  // unmatched ')', needs '('
+            }
+        } else {
+            cout << "Invalid character at position " << i + 1 << endl;
         }
-        s1.pop();
     }
-    else{
-        s1.push(vec1[i]);
-    }
-}
 
-for(int i = 0 ;i<vec2.size();i++){
-    if(vec2[i]=="#"){
-        if(s2.empty()){
-            cout<<"# can't be the First character of your string.";
-            return 1;
-        }
-        s2.pop();
-    }
-    else{
-        s2.push(vec2[i]);
-    }
-}
-  int count = 0;
- if(s1.size()==s2.size()){
-      int size = s1.size();
-    for(int i =0; i<size;i++){
-       if(s1.top()==s2.top()){
-        count++;
-        s1.pop();
-        s2.pop();
-       }
-       else{
-        cout<<"Both strings are not equal."<<endl;
-        return 1;
-       }
-    }
-    if(count==size){
-        cout<<"Both strings are equal."<<endl;
-    }
- }
- else{
-    cout<<"The string are not equal to each others."<<endl;
-    return 1;
- }
-    return 0;  
+    // Total needed = unmatched '(' + unmatched ')'
+    int total = insertions + open;
+
+    cout << "Minimum parentheses to add to make it valid: " << total << endl;
+
+    return 0;
 }
