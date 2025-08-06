@@ -2,41 +2,35 @@
 #include <vector>
 #include <stack>
 using namespace std;
-//Valid pranthesis
+
 int main() {
   vector<string>vec;
-  vec.push_back("(");
-  vec.push_back("(");//r
-  vec.push_back("(");//r
-  vec.push_back(")");//r
-  vec.push_back(")");//r
-  vec.push_back("(");//a
-  vec.push_back(")");//r
-  vec.push_back("(");
+  vec.push_back("ab");
+  vec.push_back("ac");
+  vec.push_back("da");
+  vec.push_back("da");
+  vec.push_back("ac");
+  vec.push_back("db");
+  vec.push_back("ea");
 
   stack<string>st;
-  int i = 0;
-  for( i ; i<vec.size();i++){
-    if(vec[i]=="(" ){
+  st.push(vec[0]);
+  for(int i = 1 ; i<vec.size();i++){
+    if(vec[i]!=st.top()){
         st.push(vec[i]);
     }
     else{
-        if(st.empty()){
-        cout<<"Its not a valid pranthesis 1"<<endl;
-        return 1;
-        }
         st.pop();
     }
-    
   }
 
-    if(st.empty()){
-        cout<<"Its a Valid Pranthesis"<<endl;
-    }
-    else{
-        cout<<"Its not a valid pranthesis 2"<<endl;
-    }
+  vector<string> nw;
+   while(!st.empty()){
+    nw.push_back(st.top());
+    st.pop();
+   }
 
-    return 0;
-
+   for(int i = 0 ; i< nw.size();i++){
+    cout<<nw[i]<<" ";
+   }
 }
