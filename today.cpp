@@ -13,6 +13,9 @@ int main() {
   vec.push_back("db");
   vec.push_back("ea");
 
+
+    vec.push_back("ea");
+
   stack<string>st;
   st.push(vec[0]);
   for(int i = 1 ; i<vec.size();i++){
